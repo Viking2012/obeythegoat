@@ -14,23 +14,10 @@ class HomePageTest(TestCase):
         self.assertEqual(found.func, home_page)
 
     def test_home_page_returns_correct_html(self):
-        '''
-        This is a bit of an unwieldy way of testing that we use
-        the right template. And all this faffing about with
-        .decode(), and .strip() is distracting.
-
-        request = HttpRequest()
-        response = home_page(request)
-        expected_html = render_to_string('home.html')
-        self.assertEqual(response.content.decode(),expected_html)
-        html = response.content.decode('utf8')
-        self.assertTrue(html.startswith('<html>'))
-        self.assertIn('<title>To-Do lists</title>', html)
-        self.assertTrue(html.strip().endswith('</html>'))
-        '''
-        # Instead of manually creating an HttpRequest and calling
-        # the view function, we call this, passing it the URL we
-        # want to test.
         response = self.client.get('/')
-        # This test to see if we are using the right template
+        self.assertTemplateUsed(response, 'home.html')
+
+    def test_can_save_a_POST_request(self):
+        reponse = self.client.post('/', data={'item_text': 'A new list item'})
+        self.assertIn('A new list item', response.content.decode())
         self.assertTemplateUsed(response, 'home.html')
