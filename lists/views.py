@@ -1,7 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from lists.models import Item
-
-# Create your views here.
 
 def home_page(request):
     if request.method == 'POST':
@@ -9,4 +7,4 @@ def home_page(request):
         return redirect('/')
 
     items = Item.objects.all()
-    return render(request, 'home.html', {'items':items})
+    return render(request, 'home.html', {'items': items})
