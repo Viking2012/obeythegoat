@@ -25,13 +25,15 @@ SECRET_KEY = 'ubq%am9nu72%xhy8!rgygzflm4@#(1rw^5p%mtr0w9^vdgfk81'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'wedding.orb-analytics.com'
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -119,4 +121,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR,'../static'))
+STATIC_ROOT = os.path.dirname(BASE_DIR) + '/public/static/'
